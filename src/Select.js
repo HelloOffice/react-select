@@ -213,7 +213,8 @@ const Select = React.createClass({
 		if (this.menu && this.focused && this.state.isOpen && !this.hasScrolledToOption) {
 			let focusedOptionNode = ReactDOM.findDOMNode(this.focused);
 			let menuNode = ReactDOM.findDOMNode(this.menu);
-			menuNode.scrollTop = focusedOptionNode.offsetTop;
+			const menuScroller = this.props.menuScroller ? this.props.menuScroller : this.menuScroller;
+			menuScroller(menuNode);
 			this.hasScrolledToOption = true;
 		} else if (!this.state.isOpen) {
 			this.hasScrolledToOption = false;
@@ -785,6 +786,12 @@ const Select = React.createClass({
 			return this.selectValue(this._focusedOption);
 		}
 	},
+	menuScroller(menuNode) {
+		if(!this.props.multi){
+ 			let focusedOptionNode = ReactDOM.findDOMNode(this.focused);
+ 			menuNode.scrollTop = focusedOptionNode.offsetTop;
+ 		}
+ 	},
 
 	renderLoading () {
 		if (!this.props.isLoading) return;
