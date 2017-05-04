@@ -398,6 +398,9 @@ const Select = React.createClass({
 	},
 
 	closeMenu () {
+		if(this.props.alwaysOpen){
+			return;
+		}
 		if(this.props.onCloseResetsInput) {
 			this.setState({
 				isOpen: false,
