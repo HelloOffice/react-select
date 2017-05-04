@@ -1493,6 +1493,9 @@ var Select = _react2['default'].createClass({
 	},
 
 	closeMenu: function closeMenu() {
+		if (this.props.alwaysOpen) {
+			return;
+		}
 		if (this.props.onCloseResetsInput) {
 			this.setState({
 				isOpen: false,
@@ -1532,11 +1535,12 @@ var Select = _react2['default'].createClass({
 		if (this.props.onBlur) {
 			this.props.onBlur(event);
 		}
-		var onBlurredState = {
-			isFocused: false,
-			isOpen: false,
-			isPseudoFocused: false
-		};
+		console.log('blury');
+		// var onBlurredState = {
+		// 	isFocused: false,
+		// 	isOpen: false,
+		// 	isPseudoFocused: false,
+		// };
 		if (this.props.onBlurResetsInput) {
 			onBlurredState.inputValue = '';
 		}
