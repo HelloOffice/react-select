@@ -398,9 +398,6 @@ const Select = React.createClass({
 	},
 
 	closeMenu () {
-		if(this.props.alwaysOpen){
-			return;
-		}
 		if(this.props.onCloseResetsInput) {
 			this.setState({
 				isOpen: false,
@@ -440,16 +437,17 @@ const Select = React.createClass({
 		if (this.props.onBlur) {
 			this.props.onBlur(event);
 		}
-		console.log('blury');
-		// var onBlurredState = {
-		// 	isFocused: false,
-		// 	isOpen: false,
-		// 	isPseudoFocused: false,
-		// };
+		var onBlurredState = {
+			isFocused: false,
+			isOpen: false,
+			isPseudoFocused: false,
+		};
 		if (this.props.onBlurResetsInput) {
 			onBlurredState.inputValue = '';
 		}
-		this.setState(onBlurredState);
+		if(!this.props.debug){
+			this.setState(onBlurredState);
+		}
 	},
 
 	handleInputChange (event) {
