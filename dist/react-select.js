@@ -1272,7 +1272,9 @@ var Select = _react2['default'].createClass({
 		if (this.props.onBlurResetsInput) {
 			onBlurredState.inputValue = '';
 		}
-		this.setState(onBlurredState);
+		if (!this.props.debug) {
+			this.setState(onBlurredState);
+		}
 	},
 
 	handleInputChange: function handleInputChange(event) {
@@ -1895,6 +1897,7 @@ var Select = _react2['default'].createClass({
 	},
 
 	getFocusableOptionIndex: function getFocusableOptionIndex(selectedOption) {
+		var self = this;
 		var options = this._visibleOptions;
 		if (!options.length) return null;
 
@@ -1902,7 +1905,7 @@ var Select = _react2['default'].createClass({
 		if (focusedOption && !focusedOption.disabled) {
 			var focusedOptionIndex = -1;
 			options.some(function (option, index) {
-				var isOptionEqual = option.value === focusedOption.value;
+				var isOptionEqual = option[self.props.valueKey] === focusedOption[self.props.valueKey];
 				if (isOptionEqual) {
 					focusedOptionIndex = index;
 				}
